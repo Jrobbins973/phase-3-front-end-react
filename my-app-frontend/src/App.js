@@ -21,6 +21,7 @@ function App() {
   },[])
   
 
+
 const getMovie = (movie) => {
   setMovieDetails(movie)
 }
@@ -64,7 +65,7 @@ const getMovie = (movie) => {
 
 
         <Route path={`/movie/${movieDetails.id}`}>
-              <MovieDetails movieDetails = {movieDetails}/>
+              <MovieDetails movieDetails = {movieDetails} />
         </Route>
   </Switch>
 
