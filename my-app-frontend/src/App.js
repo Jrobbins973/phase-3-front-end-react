@@ -5,7 +5,7 @@ import MovieContainer from './Components/MovieContainer';
 import NavBar from './Components/NavBar';
 import Home from './Components/Home';
 import {Link, Switch, Route} from 'react-router-dom'
-import { Button, Menu, Form} from 'semantic-ui-react'
+import { Button, Menu, Form, Dropdown} from 'semantic-ui-react'
 import MovieDetails from './Components/MovieDetails';
 
 const baseUrl = 'http://localhost:9292/movies'
@@ -13,6 +13,7 @@ const baseUrl = 'http://localhost:9292/movies'
 function App() {
   const [movies, setMovies] = useState([])
   const [movieDetails, setMovieDetails] = useState({})
+  const [genre, setGenre] = useState("")
 
   useEffect(() => {
       fetch(baseUrl)
@@ -21,15 +22,23 @@ function App() {
   },[])
   
 
+  useEffect(() => {
+    filterGenre()
+},[genre])
+
+
   // SEARCHER STUFF
-  const [genre, setGenre] = useState("")
 
   function genreChooser(e) {
-      setGenre(e.target.value)
+      setGenre(e.target.innerText)
+      // filterGenre()
+      // setTimeout(() => {
+      //   filterGenre()
+      // }, 5000)
   }
-  
-  function filterGenre(e){
-      e.preventDefault()
+
+
+  function filterGenre(){
       fetch(`http://localhost:9292/movies/genres/${genre}`)
       .then(res => res.json())
       .then(genreData => setMovies(genreData))
@@ -45,12 +54,19 @@ const getMovie = (movie) => {
 
 
 
-// console.log(movieId)
-
-
-
-// console.log(movieDetails.id)
-// const getMovieDetails = movies.map(movie => key={movie.id}, movie={movie})
+const options = [
+  { key: 1, text: 'All', value: 1 },
+  { key: 2, text: 'Adventure', value: 2 },
+  { key: 3, text: 'Fantasy', value: 3 },
+  { key: 4, text: 'Crime', value: 4 },
+  { key: 5, text: 'Mystery', value: 5 },
+  { key: 6, text: 'Sci-Fi', value: 6 },
+  { key: 7, text: 'Biography', value: 7 },
+  { key: 8, text: 'Drama', value: 8 },
+  { key: 9, text: 'Romance', value: 9 },
+  { key: 10, text: 'Western', value: 10 },
+  { key: 11, text: 'Action', value: 11 },
+]
   return ( <div>
     <Menu>
       <Link to ='/'>
@@ -59,11 +75,12 @@ const getMovie = (movie) => {
       <Link to ='/movies'>
         <Button>Movies</Button>
       </Link>
-      <Button>Reset Movies</Button>
+    
+  <Menu compact>
+    <Dropdown onChange={genreChooser}  text='Genre' options={options} simple item />
+  </Menu>
 
-
-</Menu>
-   <Form onSubmit={filterGenre}>
+{/* <Form onSubmit={filterGenre}>
         <Form.Group>
             <Form.Input
             placeholder='Enter genre'
@@ -73,7 +90,9 @@ const getMovie = (movie) => {
             />
             <Form.Button content='Submit' />
             </Form.Group>
-        </Form>
+        </Form> */}
+
+</Menu>
 
     
   <Switch>
