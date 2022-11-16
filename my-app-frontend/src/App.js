@@ -5,7 +5,7 @@ import MovieContainer from './Components/MovieContainer';
 import NavBar from './Components/NavBar';
 import Home from './Components/Home';
 import {Link, Switch, Route} from 'react-router-dom'
-import { Button, Menu} from 'semantic-ui-react'
+import { Button, Menu, Form} from 'semantic-ui-react'
 import MovieDetails from './Components/MovieDetails';
 
 const baseUrl = 'http://localhost:9292/movies'
@@ -21,6 +21,23 @@ function App() {
   },[])
   
 
+  // SEARCHER STUFF
+  const [genre, setGenre] = useState("")
+
+  function genreChooser(e) {
+      setGenre(e.target.value)
+  }
+  
+  function filterGenre(e){
+      e.preventDefault()
+      fetch(`http://localhost:9292/movies/genres/${genre}`)
+      .then(res => res.json())
+      .then(genreData => setMovies(genreData))
+      
+      // setGenre("")
+  }
+
+// END SEARCH STUFF
 
 const getMovie = (movie) => {
   setMovieDetails(movie)
@@ -42,13 +59,21 @@ const getMovie = (movie) => {
       <Link to ='/movies'>
         <Button>Movies</Button>
       </Link>
+      <Button>Reset Movies</Button>
 
 
-        <Menu.Item name='upcomingEvents' >
-        Upcoming Events
-        </Menu.Item>
 </Menu>
-
+   <Form onSubmit={filterGenre}>
+        <Form.Group>
+            <Form.Input
+            placeholder='Enter genre'
+            name='Review'
+            value={genre}
+            onChange={genreChooser}
+            />
+            <Form.Button content='Submit' />
+            </Form.Group>
+        </Form>
 
     
   <Switch>

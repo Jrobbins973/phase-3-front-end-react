@@ -1,25 +1,32 @@
 import React, {useState, useEffect} from "react";
 import { Card, Icon, Image, Container, Button, Header, Form } from 'semantic-ui-react'
 import Reviews from "./Reviews";
+import ReviewForm from "./ReviewForm";
 
 function MovieDetails (props) {
     
     const {movieDetails} = props
-    
-    // const [reviews, setReviews] = useState({})
     const [movie, setMovie] = useState({})
+    const content = movie.reviews ?  movie.reviews.map(review => <Reviews key={review.id} review = {review} /> ): null
+
+    
     
     useEffect(() => {
         fetch(`http://localhost:9292/movies/${movieDetails.id}`)
-        // fetch(`http://localhost:9292/reviews/movies/${movieDetails.id}`)
         .then(res => res.json())
         .then(setMovie)
     },[])
     
 
-// const content = movie.reviews ?  movie.reviews.map(review => <Reviews {` Anonymous Says:|| ${review.review_content} --  ${review.user_rating}`}/>) : null
-const user_id = movie.reviews ?  movie.reviews.map(review => <h4>{review.user_id}</h4>) : null
-const content = movie.reviews ?  movie.reviews.map(review => <Reviews review = {review}/> ): null
+
+    // // delete button stuff? cant this be done with active record?
+    // function onDeleteReview(reviewId){
+    //     const updatedReviewList = movie.reviews.filter(originalReviewList => originalReviewList.id !== reviewId)
+    //     setMovie(updatedReviewList)
+    // }
+
+
+
 
 
 
@@ -40,6 +47,9 @@ const content = movie.reviews ?  movie.reviews.map(review => <Reviews review = {
                     <br></br>
                     <br></br>
                     <strong>Synopsis:  </strong>{movie.description}
+                    <br></br>
+                    <br></br>
+                    <strong>Runtime: </strong>{`${movie.runtime}min`}
                     </Card.Description>
         </Card.Content>
 
@@ -52,26 +62,13 @@ const content = movie.reviews ?  movie.reviews.map(review => <Reviews review = {
 </Card>
 </Container>
 
-<Container>
-<h1>Add A Review!</h1>
-<Form>
-        <Form.Group>
-            <Form.Input
-            placeholder='Review'
-            name='Review'
-            // value=
-            // onChange={this.handleChange}
-            />
-            <Form.Input 
-            placeholder='Rating'
-            name='Rating'
-            // value={email}
-            // onChange={this.handleChange}
-            />
-            <Form.Button content='Submit' />
-            </Form.Group>
-        </Form>
-</Container>
+            <Container>
+
+                <h1>Add A Review!</h1>
+
+                <ReviewForm movie = {movie} setMovie={setMovie}/>
+
+            </Container>
 
 
 <Container >
