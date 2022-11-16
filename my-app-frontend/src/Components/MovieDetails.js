@@ -7,7 +7,7 @@ function MovieDetails (props) {
     
     const {movieDetails} = props
     const [movie, setMovie] = useState({})
-    const content = movie.reviews ?  movie.reviews.map(review => <Reviews key={review.id} review = {review} /> ): null
+    const content = movie.reviews ?  movie.reviews.map(review => <Reviews key={review.id} review = {review} onDeleteReview = {onDeleteReview} movie={movie} setMovie={setMovie} onUpdate={onUpdate}/> ): null
 
     
     
@@ -20,12 +20,16 @@ function MovieDetails (props) {
 
 
     // // delete button stuff? cant this be done with active record?
-    // function onDeleteReview(reviewId){
-    //     const updatedReviewList = movie.reviews.filter(originalReviewList => originalReviewList.id !== reviewId)
-    //     setMovie(updatedReviewList)
-    // }
+    function onDeleteReview(reviewId){
+        const updatedReviewList = movie.reviews.filter(originalReviewList => originalReviewList.id !== reviewId)
+        setMovie({...movie, reviews:updatedReviewList})
+        // console.log(updatedReviewList)
+    }
 
-
+    function onUpdate(updatedReview) {
+        setMovie({...movie, reviews:updatedReview})
+    }
+    // then(newReviewData => setMovie({...movie, reviews:[...movie.reviews, newReviewData]}))
 
 
 

@@ -40,10 +40,9 @@ function ReviewForm(props){
                 body: JSON.stringify(newReview),
             })
             .then(res => res.json())
-            .then(newReviewData => setMovie([...movie, newReviewData]))
+            .then(newReviewData => setMovie({...movie, reviews:[...movie.reviews, newReviewData]}))
     
         }
-    
     
         // END OF FORM LOGIC
     return <div>
