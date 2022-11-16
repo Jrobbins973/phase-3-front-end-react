@@ -28,7 +28,7 @@ function handleClick() {
                 <span className='date'>{`Rated: ${movie.MPA_rating} | Released: ${movie.release_year}`}</span>
             </Card.Meta>
             <Card.Description>
-                <span>{`Starring: ${movie.stars}`}</span>
+                {/* <span>{`Starring: ${movie.stars}`}</span> */}
             </Card.Description>
             </Card.Content>
             <Card.Content extra>
