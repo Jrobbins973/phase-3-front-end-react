@@ -6,8 +6,9 @@ function Home() {
         <div className="homepage">
             <h1 className="title">Welcome To MovieBuddy</h1>
             <Link to ='/movies'>
-            <button className='button-85'>Enter</button>
+            <button className='button-49'>Enter</button>
             </Link>
+            
             
         </div>
     )

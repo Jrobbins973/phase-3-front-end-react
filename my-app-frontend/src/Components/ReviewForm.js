@@ -49,13 +49,13 @@ function ReviewForm(props){
         <Form onSubmit={reviewFormSubmit}>
         <Form.Group>
             <Form.Input
-            placeholder='Review'
+            placeholder='Thoughts?'
             name='Review'
             value={userReview}
             onChange={addReview}
             />
             <Form.Input 
-            placeholder='Rating'
+            placeholder='Rating (1-10)'
             name='Rating'
             value={userRating}
             onChange={addRating}
