@@ -54,7 +54,7 @@ const getMovie = (movie) => {
 
 
 
-const options = [
+const genreOptions = [
   { key: 1, text: 'All', value: 1 },
   { key: 2, text: 'Adventure', value: 2 },
   { key: 3, text: 'Fantasy', value: 3 },
@@ -66,18 +66,29 @@ const options = [
   { key: 9, text: 'Romance', value: 9 },
   { key: 10, text: 'Western', value: 10 },
   { key: 11, text: 'Action', value: 11 },
+  { key: 12, text: 'Comedy', value: 11 },
+  { key: 13, text: 'Family', value: 11 }
 ]
-  return ( <div>
+
+const releaseYearOptions = [
+  { key: 1, text: 'Descending', value: 1 },
+  { key: 2, text: 'Ascending', value: 2 },
+]
+  return ( 
+  <div >
     <Menu>
       <Link to ='/'>
-        <Button>Home</Button>
+        <button className='button-85'>Home</button>
       </Link>
       <Link to ='/movies'>
-        <Button>Movies</Button>
+      <button className='button-85'>Movies</button>
       </Link>
     
   <Menu compact>
-    <Dropdown onChange={genreChooser}  text='Genre' options={options} simple item />
+    <Dropdown onChange={genreChooser}  text='Genre' options={genreOptions} simple item />
+  </Menu>
+  <Menu compact>
+    <Dropdown  text='Release Year' options={releaseYearOptions} simple item />
   </Menu>
 
 {/* <Form onSubmit={filterGenre}>
@@ -109,7 +120,9 @@ const options = [
 
 
         <Route path={`/movie/${movieDetails.id}`}>
+          <div >
               <MovieDetails movieDetails = {movieDetails} />
+              </div>
         </Route>
   </Switch>
 

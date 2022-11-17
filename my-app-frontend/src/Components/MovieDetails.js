@@ -36,7 +36,7 @@ function MovieDetails (props) {
 
 
     return (
-        <div>
+        <div className="card-container">
             <Container>
 <Card>
         <Image src={movieDetails.poster} wrapped ui={true} />
@@ -66,19 +66,18 @@ function MovieDetails (props) {
 </Card>
 </Container>
 
+        <div className='body'>
             <Container>
-
                 <h1>Add A Review!</h1>
-
                 <ReviewForm movie = {movie} setMovie={setMovie}/>
-
             </Container>
-
-
+        </div>
+<div className="reviews">
 <Container >
 <h2>REVIEWS: </h2>
 {content}
 </Container>
+</div>
         
 
             

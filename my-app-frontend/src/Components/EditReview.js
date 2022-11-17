@@ -6,9 +6,8 @@ function EditReview(props) {
     const {review, handleSubmit, isEditing, setIsEditing, onUpdate, movie, setMovie} = props
 
     // const [updatedReview, setUpdatedReview] = useState({...review})
-    const [reviewChange, setReviewChange] = useState("")
-    const [reviewRating, setRatingChange] = useState("")
-
+    const [reviewChange, setReviewChange] = useState(review.review_content)
+    const [reviewRating, setRatingChange] = useState(review.user_rating)
 
     function handleReviewChange(e) {
         setReviewChange(e.target.value)
