@@ -5,8 +5,9 @@ import MovieContainer from './Components/MovieContainer';
 import NavBar from './Components/NavBar';
 import Home from './Components/Home';
 import {Link, Switch, Route} from 'react-router-dom'
-import { Button, Menu, Form, Dropdown} from 'semantic-ui-react'
+import { Button, Menu, Form, Dropdown, Checkbox} from 'semantic-ui-react'
 import MovieDetails from './Components/MovieDetails';
+import { ToggleButton } from '@mui/material';
 
 const baseUrl = 'http://localhost:9292/movies'
 
@@ -14,6 +15,10 @@ function App() {
   const [movies, setMovies] = useState([])
   const [movieDetails, setMovieDetails] = useState({})
   const [genre, setGenre] = useState("")
+  const [oldestToNewest, setOldestToNewest] = useState(false)
+  const [oldest, setOldest] = useState(false)
+  const [newToOld, setNewToOld] = useState(false)
+  const [newest, setNewest] = useState(false)
 
   useEffect(() => {
       fetch(baseUrl)
@@ -26,9 +31,13 @@ function App() {
     filterGenre()
 },[genre])
 
+  // useEffect(() => {
+  //   setOrder()
+  // },[releaseOrder])
 
-  // SEARCHER STUFF
+  // filter logic
 
+  // GENRES
   function genreChooser(e) {
       setGenre(e.target.innerText)
       // filterGenre()
@@ -36,8 +45,6 @@ function App() {
       //   filterGenre()
       // }, 5000)
   }
-
-
   function filterGenre(){
       fetch(`http://localhost:9292/movies/genres/${genre}`)
       .then(res => res.json())
@@ -46,7 +53,30 @@ function App() {
       // setGenre("")
   }
 
-// END SEARCH STUFF
+  // DATE OF RELEASE
+
+  function releaseOrderChanger() {
+    setOldestToNewest(!oldestToNewest)
+  }
+
+  function releaseOrderChangerTwo() {
+    setNewToOld(!newToOld)
+  }
+
+  
+  function setOrderToOldest(){
+    fetch('http://localhost:9292/movies/oldest')
+    .then(res => res.json())
+    .then(orderData => setMovies(orderData))
+  }
+  function setOrderToNewest(){
+    fetch('http://localhost:9292/movies/newest')
+    .then(res => res.json())
+    .then(orderData => setMovies(orderData))
+  }
+
+
+// end of filter logic
 
 const getMovie = (movie) => {
   setMovieDetails(movie)
@@ -71,8 +101,8 @@ const genreOptions = [
 ]
 
 const releaseYearOptions = [
-  { key: 1, text: 'Descending', value: 1 },
-  { key: 2, text: 'Ascending', value: 2 },
+  { key: 1, text: 'Most Recent', value: 1 },
+  { key: 2, text: 'Oldest', value: 2 },
 ]
   return ( 
   <div >
@@ -88,7 +118,12 @@ const releaseYearOptions = [
     <Dropdown onChange={genreChooser}  text='Genre' options={genreOptions} simple item />
   </Menu>
   <Menu compact>
-    <Dropdown  text='Release Year' options={releaseYearOptions} simple item />
+    <button onClick={() => setOldest((prevChecked) => !prevChecked)} className='button-85'>Oldest - Newest</button> <Checkbox onChange={releaseOrderChanger} toggle checked={oldest}/>
+    {oldest ? setOrderToOldest() : filterGenre()}
+
+    <button onClick={() => setNewest((prevChecked) => !prevChecked)} className='button-85'>Newest - Oldest</button> <Checkbox onChange={releaseOrderChangerTwo} toggle checked={newest}/>
+    {newest ? setOrderToNewest() : filterGenre()}
+    {/* // text='Release Year' options={releaseYearOptions} simple item /> */}
   </Menu>
 
 {/* <Form onSubmit={filterGenre}>
