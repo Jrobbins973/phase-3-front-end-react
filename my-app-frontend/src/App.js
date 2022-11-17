@@ -14,11 +14,11 @@ const baseUrl = 'http://localhost:9292/movies'
 function App() {
   const [movies, setMovies] = useState([])
   const [movieDetails, setMovieDetails] = useState({})
-  const [genre, setGenre] = useState("")
-  const [oldestToNewest, setOldestToNewest] = useState(false)
-  const [oldest, setOldest] = useState(false)
-  const [newToOld, setNewToOld] = useState(false)
-  const [newest, setNewest] = useState(false)
+  // const [genre, setGenre] = useState("")
+  // const [oldestToNewest, setOldestToNewest] = useState(false)
+  // const [oldest, setOldest] = useState(false)
+  // const [newToOld, setNewToOld] = useState(false)
+  // const [newest, setNewest] = useState(false)
 
   useEffect(() => {
       fetch(baseUrl)
@@ -27,9 +27,9 @@ function App() {
   },[])
   
 
-  useEffect(() => {
-    filterGenre()
-},[genre])
+//   useEffect(() => {
+//     filterGenre()
+// },[genre])
 
   // useEffect(() => {
   //   setOrder()
@@ -38,30 +38,26 @@ function App() {
   // filter logic
 
   // GENRES
-  function genreChooser(e) {
-      setGenre(e.target.innerText)
-      // filterGenre()
-      // setTimeout(() => {
-      //   filterGenre()
-      // }, 5000)
-  }
-  function filterGenre(){
-      fetch(`http://localhost:9292/movies/genres/${genre}`)
-      .then(res => res.json())
-      .then(genreData => setMovies(genreData))
+  // function genreChooser(e) {
+  //     setGenre(e.target.innerText)
+  
+  // }
+  // function filterGenre(){
+  //     fetch(`http://localhost:9292/movies/genres/${genre}`)
+  //     .then(res => res.json())
+  //     .then(genreData => setMovies(genreData))
       
-      // setGenre("")
-  }
+  // }
 
   // DATE OF RELEASE
 
-  function releaseOrderChanger() {
-    setOldestToNewest(!oldestToNewest)
-  }
+  // function releaseOrderChanger() {
+  //   setOldestToNewest(!oldestToNewest)
+  // }
 
-  function releaseOrderChangerTwo() {
-    setNewToOld(!newToOld)
-  }
+  // function releaseOrderChangerTwo() {
+  //   setNewToOld(!newToOld)
+  // }
 
   
   function setOrderToOldest(){
@@ -100,13 +96,13 @@ const genreOptions = [
   { key: 13, text: 'Family', value: 11 }
 ]
 
-const releaseYearOptions = [
-  { key: 1, text: 'Most Recent', value: 1 },
-  { key: 2, text: 'Oldest', value: 2 },
-]
+// const releaseYearOptions = [
+//   { key: 1, text: 'Most Recent', value: 1 },
+//   { key: 2, text: 'Oldest', value: 2 },
+// ]
   return ( 
-  <div >
-    <Menu>
+  <div className='main-app'>
+    {/* <Menu>
       <Link to ='/'>
         <button className='button-85'>Home</button>
       </Link>
@@ -124,21 +120,9 @@ const releaseYearOptions = [
     <button onClick={() => setNewest((prevChecked) => !prevChecked)} className='button-85'>Newest - Oldest</button> <Checkbox onChange={releaseOrderChangerTwo} toggle checked={newest}/>
     {newest ? setOrderToNewest() : filterGenre()}
     {/* // text='Release Year' options={releaseYearOptions} simple item /> */}
-  </Menu>
+  {/* </Menu> */}
 
-{/* <Form onSubmit={filterGenre}>
-        <Form.Group>
-            <Form.Input
-            placeholder='Enter genre'
-            name='Review'
-            value={genre}
-            onChange={genreChooser}
-            />
-            <Form.Button content='Submit' />
-            </Form.Group>
-        </Form> */}
-
-</Menu>
+{/* </Menu> */}
 
     
   <Switch>
@@ -149,7 +133,7 @@ const releaseYearOptions = [
 
 
       <Route path='/movies'>
-            <MovieContainer movies = {movies} getMovie= {getMovie}/>
+            <MovieContainer movies = {movies} setMovies={setMovies} getMovie= {getMovie} setOrderToOldest={setOrderToOldest} setOrderToNewest={setOrderToNewest}/>
       </Route>
 
 
