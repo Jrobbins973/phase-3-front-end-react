@@ -69,8 +69,8 @@ function handleEdit() {
                 </Label>
                 </Button> */}
 
-            <Button onClick={handleEdit} size="mini">EDIT</Button>
-            <Button onClick={handleDeleteClick} basic color='red'  size="mini">Delete</Button>
+            <button className="button-89" onClick={handleEdit} size="mini">Edit</button>
+            <button className="button-89" onClick={handleDeleteClick}   size="mini">Delete</button>
         </Comment.Content>
         </Comment>
         </Comment.Group>

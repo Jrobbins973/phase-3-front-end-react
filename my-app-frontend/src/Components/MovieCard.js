@@ -20,8 +20,16 @@ function handleClick() {
 // console.log(movie.title)
     return (
 <div>
-        <Card>
-        <Image src={movie.poster} wrapped ui={false} />
+
+
+
+
+
+
+
+    
+        <Card color='red'>
+        <Image src={movie.poster} wrapped ui={false} bordered />
         <Card.Content>
             <Card.Header>{movie.title}</Card.Header>
             <Card.Meta>

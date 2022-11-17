@@ -60,7 +60,7 @@ function ReviewForm(props){
             value={userRating}
             onChange={addRating}
             />
-            <Form.Button content='Submit' />
+            <button className="button-89">Submit</button>
             </Form.Group>
         </Form>
     </div>
