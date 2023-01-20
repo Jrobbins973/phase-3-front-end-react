@@ -11,8 +11,8 @@ function MovieContainer(props){
     const [genre, setGenre] = useState("")
     const [oldestToNewest, setOldestToNewest] = useState(false)
     const [oldest, setOldest] = useState(false)
-    // const [newToOld, setNewToOld] = useState(false)
-    const [newest, setNewest] = useState(false)
+    const [newToOld, setNewToOld] = useState(false)
+    // const [newest, setNewest] = useState(false)
 
 const {movies, getMovie, setOrderToOldest, setOrderToNewest, setMovies} = props
 const renderMovies = movies.map(movie => <MovieCard key={movie.id} movie={movie} getMovie={getMovie}/>)
@@ -85,9 +85,9 @@ return (
         {newest ? setOrderToNewest() : filterGenre()} */}
         {/* // text='Release Year' options={releaseYearOptions} simple item /> */}
     </Menu>
-
 </Menu>
 
+        <h1 className="movie-container-top">{`${genre}`}</h1>
         
         <Grid columns={4} celled>
         {renderMovies}

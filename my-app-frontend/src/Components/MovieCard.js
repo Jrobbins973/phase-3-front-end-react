@@ -48,7 +48,7 @@ function handleClick() {
             <br></br>
 
         <Link to = {`/movie/${movie.id}`}>
-            <Button onClick={handleClick}>Click For More Details</Button>
+            <button onClick={handleClick} className="button-85">Click For More Details</button>
         </Link>
             </Card.Content>
         </Card>

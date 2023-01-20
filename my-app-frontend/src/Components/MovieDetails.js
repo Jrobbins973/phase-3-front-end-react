@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Card, Icon, Image, Container, Button, Header, Form } from 'semantic-ui-react'
+import {Link, Switch, Route} from 'react-router-dom'
+
 import Reviews from "./Reviews";
 import ReviewForm from "./ReviewForm";
 
@@ -7,7 +9,18 @@ function MovieDetails (props) {
     
     const {movieDetails} = props
     const [movie, setMovie] = useState({})
-    const content = movie.reviews ?  movie.reviews.map(review => <Reviews key={review.id} review = {review} onDeleteReview = {onDeleteReview} movie={movie} setMovie={setMovie} onUpdate={onUpdate}/> ): null
+    const content = movie.reviews ?  movie.reviews.map(review => <Reviews key={review.id} 
+        review = {review} 
+        onDeleteReview = {onDeleteReview} 
+        movie={movie} 
+        setMovie={setMovie} 
+        onUpdate={onUpdate}/> 
+        ) : null
+
+    // const renderReviewForm = movie.reviews ?  movie.reviews.map(review => <ReviewForm key={review.id} 
+    //     review = {review} 
+    //     movie={movie} /> 
+    //     ) : null
 
     
     
@@ -17,7 +30,7 @@ function MovieDetails (props) {
         .then(setMovie)
     },[])
     
-
+    
 
     // // delete button stuff? cant this be done with active record?
     function onDeleteReview(reviewId){
@@ -27,7 +40,7 @@ function MovieDetails (props) {
     }
 
     function onUpdate(updatedReview) {
-        setMovie({...movie, reviews:updatedReview})
+        setMovie({...movie, reviews:updatedReview}) 
     }
     // then(newReviewData => setMovie({...movie, reviews:[...movie.reviews, newReviewData]}))
 
@@ -37,8 +50,11 @@ function MovieDetails (props) {
 
     return (
         <div className="card-container">
+            <Link to ='/movies'>
+            <button className="button-86">Back</button>
+            </Link>
             <Container>
-<Card>
+    <Card>
         <Image src={movieDetails.poster} wrapped ui={true} />
 
         <Card.Content>
@@ -66,17 +82,26 @@ function MovieDetails (props) {
 </Card>
 </Container>
 
-        <div className='body'>
-            <Container>
-                <h1>Add A Review!</h1>
-                <ReviewForm movie = {movie} setMovie={setMovie}/>
-            </Container>
-        </div>
+
+        {/* REVIEW FORM */}
+
+    <div className='body'>
+        <Container>
+            <h1 className="review-text">Add A Review!</h1>
+        {/* {renderReviewForm} */}
+            <ReviewForm movie = {movie} setMovie={setMovie} review={movie.reviews}/>
+        </Container>
+    </div>
+
+        {/* END REVIEW FORM */}
+
+
+
 <div className="reviews">
-<Container >
-<h2>REVIEWS: </h2>
-{content}
-</Container>
+        <Container >
+            <h2 className="review-text">Reviews: </h2>
+                    {content}  
+        </Container>
 </div>
         
 

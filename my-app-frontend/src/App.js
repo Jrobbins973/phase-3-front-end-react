@@ -31,9 +31,9 @@ function App() {
 //     filterGenre()
 // },[genre])
 
-  // useEffect(() => {
-  //   setOrder()
-  // },[releaseOrder])
+//   useEffect(() => {
+//     setOrder()
+//   },[releaseOrder])
 
   // filter logic
 

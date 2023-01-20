@@ -69,8 +69,8 @@ function handleEdit() {
                 </Label>
                 </Button> */}
 
-            <button className="button-89" onClick={handleEdit} size="mini">Edit</button>
-            <button className="button-89" onClick={handleDeleteClick}   size="mini">Delete</button>
+            <button className="button-85" onClick={handleEdit} size="mini">Edit</button>
+            <button className="button-85" onClick={handleDeleteClick}   size="mini">Delete</button>
         </Comment.Content>
         </Comment>
         </Comment.Group>

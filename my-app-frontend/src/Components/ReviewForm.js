@@ -5,8 +5,12 @@ import { Card, Icon, Image, Container, Button, Header, Form } from 'semantic-ui-
 function ReviewForm(props){
     
     const {movie, setMovie} = props
-        // START OF FORM LOGIC
+    
+    // const singleReview = review.map(oneReview => oneReview )
 
+    // console.log(singleReview.id)
+    // debugger 
+    // START OF FORM LOGIC
         const [userReview, setUserReview] = useState("")
         const [userRating, setUserRating] = useState("")
     
@@ -21,17 +25,21 @@ function ReviewForm(props){
         function reviewFormSubmit(e){
             e.preventDefault()
             const newReview = {
+                
+                movie_id: movie.id,
                 review_content: userReview,
                 user_rating: userRating
             }
+            console.log(newReview)
             addNewReview(newReview)
             
             setUserReview("")
             setUserRating("")
         }
     
+
         const addNewReview = (newReview) => {
-            fetch('http://localhost:9292/reviews', {
+            fetch(`http://localhost:9292/reviews`, {
                 method: "POST",
                 headers: {
                     "Content-type": 'application/json',
@@ -41,10 +49,10 @@ function ReviewForm(props){
             })
             .then(res => res.json())
             .then(newReviewData => setMovie({...movie, reviews:[...movie.reviews, newReviewData]}))
-    
         }
-    
         // END OF FORM LOGIC
+
+
     return <div>
         <Form onSubmit={reviewFormSubmit}>
         <Form.Group>
@@ -60,7 +68,7 @@ function ReviewForm(props){
             value={userRating}
             onChange={addRating}
             />
-            <button className="button-89">Submit</button>
+            <button className="button-85">Submit</button>
             </Form.Group>
         </Form>
     </div>
