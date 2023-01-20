@@ -17,9 +17,12 @@ function EditReview(props) {
         setRatingChange(e.target.value)
     }
 
+   
+
     function reviewChangeSubmit(e){
         e.preventDefault()
         const updatedReview = {
+            movie_id: movie.id,
             review_content: reviewChange,
             user_rating: reviewRating
         }
@@ -41,8 +44,7 @@ function EditReview(props) {
             body: JSON.stringify(updatedReview)
         })
         .then(r => r.json())
-        .then(updatedReviewData => setMovie({...movie, 
-            reviews:movie.reviews.map(review => review.id = updatedReviewData.id ? updatedReviewData : review)}))
+        .then(updatedMovieReviews => setMovie(updatedMovieReviews))
     }
 
     return <div>
@@ -60,7 +62,7 @@ function EditReview(props) {
             value={reviewRating}
             onChange={handleRatingChange}
             />
-            <Form.Button content='Submit' />
+            <button className="button-85">Submit</button> 
             </Form.Group>
         </Form>
     </div>
